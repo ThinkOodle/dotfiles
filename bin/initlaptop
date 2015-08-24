@@ -1,0 +1,343 @@
+#!/bin/bash
+
+###############################################################################
+# Define what gets installed
+###############################################################################
+
+# Define packages to install
+PACKAGES=(
+    git
+    macvim --with-override-system-vim
+    mysql
+    npm
+    rbenv
+    ruby-build
+    wget
+)
+
+# Define gems to install
+RUBY_GEMS=(
+    bundler
+    filewatcher
+    cocoapods
+)
+
+# Define apps to install for standard setup
+CASKS=(
+    adobe-creative-cloud
+    alfred
+    bartender
+    dropbox
+    google-chrome
+    microsoft-office
+    skype
+    slack
+    vlc
+)
+
+# Define apps to install for devs
+DEVCASKS=(
+    firefox
+    iterm2
+    macvim
+    sequel-pro
+    vagrant
+)
+
+# Define fonts to install
+FONTS=(
+    font-dosis
+    font-lato
+    font-fontawesome
+    font-merriweather
+    font-open-sans-condensed
+    font-open-sans
+)
+
+###############################################################################
+# The functions that make the magic happen
+###############################################################################
+
+# Set the colours you can use
+black='\033[0;30m'
+white='\033[0;37m'
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+blue='\033[0;34m'
+magenta='\033[0;35m'
+cyan='\033[0;36m'
+pink='\033[0;95m'
+lightblue='\033[0;94m'
+
+# Resets the style
+reset=`tput sgr0`
+
+# Color-echo. Improved. [Thanks @joaocunha]
+# arg $1 = message
+# arg $2 = Color
+cecho() {
+  echo -e "${2}${1}${reset}"
+  return
+}
+
+fancy_echo() {
+  local fmt="$1"; shift
+
+  # shellcheck disable=SC2059
+  printf "\n$fmt\n" "$@"
+}
+
+get_sudo() {
+  # Here we go.. ask for the administrator password upfront and run a
+  # keep-alive to update existing `sudo` time stamp until script has finished
+  cecho "Let's get this sudo business out of the way..." $red
+
+  sudo -v
+  while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+}
+
+append_to_zshrc() {
+  local text="$1" zshrc
+  local skip_new_line="${2:-0}"
+
+  if [ -w "$HOME/.zshrc.local" ]; then
+    zshrc="$HOME/.zshrc.local"
+  else
+    zshrc="$HOME/.zshrc"
+  fi
+
+  if ! grep -Fqs "$text" "$zshrc"; then
+    if [ "$skip_new_line" -eq 1 ]; then
+      printf "%s\n" "$text" >> "$zshrc"
+    else
+      printf "\n%s\n" "$text" >> "$zshrc"
+    fi
+  fi
+}
+
+trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
+
+set -e
+
+check_for_homebrew() {
+  if ! command -v brew >/dev/null; then
+    fancy_echo "Installing Homebrew ..."
+      curl -fsS \
+        'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
+
+      append_to_zshrc '# recommended by brew doctor'
+
+      # shellcheck disable=SC2016
+      append_to_zshrc 'export PATH="/usr/local/bin:$PATH"' 1
+
+      export PATH="/usr/local/bin:$PATH"
+  else
+    fancy_echo "Homebrew already installed. Skipping ..."
+  fi
+}
+
+check_for_caskroom() {
+  if ! command -v brew cask >/dev/null; then
+    fancy_echo "Installing Caskroom ..."
+      brew install caskroom/cask/brew-cask
+  else
+    fancy_echo "Caskroom already installed. Skipping ..."
+  fi
+}
+
+install_packages() {
+  echo "Do you have XCode installed? (y/n)"
+  read -r response
+  if [[ $response =~ ^([nN][oO]|[nN])$ ]]; then
+    echo "You need to install XCode first. Come back when you're finished"
+    open https://itunes.apple.com/us/app/xcode/id497799835?mt=12
+  fi
+
+  cecho "Installing packages..." $lightblue
+  brew install ${PACKAGES[@]}
+  brew linkapps macvim
+
+  echo "Installing global npm packages..."
+  npm install marked -g
+
+  echo "Installing Oh-My-Zsh..."
+  curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+  if ! [ -h "$HOME/.zshrc" ]; then
+    echo "Installing Dotfiles..."
+    git clone https://github.com/ThinkOodle/dotfiles.git ~/.dotfiles
+    ~/.dotfiles/script/bootstrap
+  else
+    echo "Skipping Dotfile installation"
+  fi
+
+}
+
+install_apps() {
+  echo "Installing apps..."
+  brew cask install ${CASKS[@]}
+
+  if [ $1 == "withDevApps" ]; then
+    echo "Installing dev apps..."
+    brew cask install ${DEVCASKS[@]}
+  fi
+}
+
+install_fonts() {
+  echo "Installing fonts..."
+  brew tap caskroom/fonts
+  brew cask install ${FONTS[@]}
+}
+
+install_gems() {
+  echo "Installing Ruby gems"
+  sudo gem install ${RUBY_GEMS[@]}
+}
+
+apply_standard_configs() {
+  echo "Configuring OSX..."
+
+  ################################################################################
+  # General Settings
+  ###############################################################################
+
+  # Require password as soon as screensaver or sleep mode starts
+  defaults write com.apple.screensaver askForPassword -int 1
+  defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+  # Automatically quit printer app once the print jobs complete
+  defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+  # Save to disk, rather than iCloud, by default?
+  defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+  # Speed up Mission Control animations and grouping windows by application
+  defaults write com.apple.dock expose-animation-duration -float 0.1
+  defaults write com.apple.dock "expose-group-by-app" -bool true
+
+  # Set email addresses to copy as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app
+  defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+
+
+  ################################################################################
+  # Trackpad, mouse, keyboard, Bluetooth accessories, and input
+  ###############################################################################
+
+  # Enable tap-to-click
+  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+  defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+  defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+
+  # Set fast key repeat rate
+  defaults write NSGlobalDomain KeyRepeat -int 0
+
+  # Increase sound quality for Bluetooth headphones/headsets
+  defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+  # Disable display from automatically adjusting brightness?
+  sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool false
+
+
+  ###############################################################################
+  # General Power and Performance modifications
+  ###############################################################################
+
+  # Speed up wake from sleep to 24 hours from an hour
+  # http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
+  sudo pmset -a standbydelay 86400
+
+
+  ###############################################################################
+  # Finder
+  ###############################################################################
+
+  # Show icons for hard drives, servers, and removable media on the desktop?
+  defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+
+  # Show all filename extensions in Finder by default?
+  defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+  # Show status bar in Finder by default?
+  defaults write com.apple.finder ShowStatusBar -bool true
+
+  # Use column view in all Finder windows by default?
+  defaults write com.apple.finder FXPreferredViewStyle Clmv
+
+  # Avoid creation of .DS_Store files on network volumes?
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+}
+
+apply_dev_configs() {
+  echo "Adding Dev Specific OSX Configs..."
+
+  # Show hidden files in Finder by default?
+  defaults write com.apple.Finder AppleShowAllFiles -bool true
+
+  # Enable the Develop menu and the Web Inspector in Safari
+  defaults write com.apple.Safari IncludeDevelopMenu -bool true
+  defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+  defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+
+  # Add a context menu item for showing the Web Inspector in web views
+  defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+
+  if [ ! -d "$HOME/.bin/" ]; then
+    mkdir "$HOME/.bin"
+  fi
+
+  if [ ! -f "$HOME/.zshrc" ]; then
+    touch "$HOME/.zshrc"
+  fi
+
+  # shellcheck disable=SC2016
+  append_to_zshrc 'export PATH="$HOME/.bin:$PATH"'
+
+  case "$SHELL" in
+    */zsh) : ;;
+    *)
+      fancy_echo "Changing your shell to zsh ..."
+        chsh -s "$(which zsh)"
+      ;;
+  esac
+}
+
+###############################################################################
+# Prompts
+###############################################################################
+
+echo
+cecho "##############################" $pink
+cecho "# What do you want to do?" $pink
+cecho "##############################" $pink
+echo
+cecho "1.) Setup a standard laptop" $lightblue
+cecho "2.) Setup a dev laptop"
+cecho "3.) Install packages and gems"
+cecho "4.) Install standard apps"
+cecho "5.) Install standard and dev apps"
+cecho "6.) Install fonts"
+cecho "7.) Apply standard configurations"
+cecho "8.) Apply dev configurations"
+
+read -r response
+case "$response" in
+  "1" ) get_sudo; check_for_homebrew; check_for_caskroom; apply_standard_configs; install_apps; install_fonts;;
+  "2" ) get_sudo; check_for_homebrew; check_for_caskroom; apply_standard_configs; apply_dev_configs; install_packages; install_gems; install_apps "withDevApps"; install_fonts;;
+  "3" ) get_sudo; check_for_homebrew; install_packages; install_gems;;
+  "4" ) get_sudo; check_for_homebrew; check_for_caskroom; install_apps;;
+  "5" ) get_sudo; check_for_homebrew; check_for_caskroom; install_apps "withDevApps";;
+  "6" ) get_sudo; check_for_homebrew; check_for_caskroom; install_fonts;;
+  "7" ) get_sudo; apply_standard_configs; apply_dev_configs;;
+  "8" ) get_sudo; apply_dev_configs;;
+  * ) echo; cecho "You didn't select an option. I'm outta here!" $red;;
+esac
+
+echo ""
+echo ""
+cecho "################################################################################" $white
+cecho "Note that some of these changes require a logout/restart to take effect." $red
+cecho "################################################################################" $white
+echo
+cecho "Done..." $pink
