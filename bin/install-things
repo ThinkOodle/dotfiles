@@ -1,0 +1,42 @@
+#!/bin/sh
+
+source $DOTZSH/functions/cecho
+
+###############################################################################
+# Prompts
+###############################################################################
+
+echo
+cecho "##############################" $pink
+cecho "# What do you want to do?" $pink
+cecho "##############################" $pink
+echo
+cecho "1.) Setup a standard laptop" $lightblue
+cecho "2.) Setup a dev laptop"
+cecho "3.) Install packages and gems"
+cecho "4.) Install standard apps"
+cecho "5.) Install dev apps"
+cecho "6.) Install fonts"
+cecho "7.) Apply standard configurations"
+cecho "8.) Apply dev configurations"
+
+read -r response
+case "$response" in
+  "1" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/set-defaults.sh; $DOTZSH/osx/install-apps.sh; $DOTZSH/osx/install-fonts.sh;;
+  "2" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/set-defaults.sh; $DOTZSH/osx/set-dev-defaults.sh; $DOTZSH/osx/install-packages.sh; $DOTZSH/osx/install-gems.sh; $DOTZSH/osx/install-apps.sh; $DOTZSH/osx/install-dev-apps.sh; $DOTZSH/osx/install-fonts.sh;;
+  "3" ) get-sudo; check-for-homebrew; $DOTZSH/osx/install-packages.sh; $DOTZSH/osx/install-gems.sh;;
+  "4" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/install-apps.sh;;
+  "5" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/install-dev-apps.sh;;
+  "6" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/install-fonts.sh;;
+  "7" ) get-sudo; $DOTZSH/osx/set-defaults.sh;;
+  "8" ) get-sudo; $DOTZSH/osx/set-dev-defaults.sh;;
+  * ) echo; cecho "You didn't select an option. I'm outta here!" $red;;
+esac
+
+echo ""
+echo ""
+cecho "################################################################################" $white
+cecho "Note that some of these changes require a logout/restart to take effect." $red
+cecho "################################################################################" $white
+echo
+cecho "Done..." $pink

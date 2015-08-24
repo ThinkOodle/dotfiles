@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# See if Caskroom is installed and install it if it isn't
+#
+
+if ! command -v brew cask >/dev/null; then
+  echo "Installing Caskroom ..."
+    brew install caskroom/cask/brew-cask
+else
+  echo "Caskroom already installed. Skipping ..."
+fi

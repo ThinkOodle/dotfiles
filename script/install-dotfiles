@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# Installs homebrew, gets all dotfiles from the repo,
+# installs oh-my-zsh, and executes the setup script for the dotfiles
+
+curl -L https://raw.githubusercontent.com/thinkoodle/dotfiles/master/homebrew/install.sh | sh
+
+echo "Installing Oh-My-Zsh..."
+curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+if ! [ -h "$HOME/.zshrc" ]; then
+  echo "Installing Dotfiles..."
+  git clone https://github.com/ThinkOodle/dotfiles.git ~/.dotfiles
+  ~/.dotfiles/script/bootstrap
+else
+  echo "Skipping Dotfile installation"
+fi

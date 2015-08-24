@@ -1,41 +1,74 @@
-# Sets reasonable OS X defaults.
 #
-# Or, in other words, set shit how I like in OS X.
+# Sets reasonable OS X defaults
 #
-# The original idea (and a couple settings) were grabbed from:
-#   https://github.com/mathiasbynens/dotfiles/blob/master/.osx
-#
-# Run ./set-defaults.sh and you'll be good to go.
 
-# Disable press-and-hold for keys in favor of key repeat.
-defaults write -g ApplePressAndHoldEnabled -bool false
+echo "Configuring OSX..."
 
-# Use AirDrop over every interface. srsly this should be a default.
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
+################################################################################
+# General Settings
+###############################################################################
 
-# Always open everything in Finder's list view. This is important.
-defaults write com.apple.Finder FXPreferredViewStyle Nlsv
+# Require password as soon as screensaver or sleep mode starts
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
 
-# Show the ~/Library folder.
-chflags nohidden ~/Library
+# Automatically quit printer app once the print jobs complete
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-# Set a really fast key repeat.
+# Save to disk, rather than iCloud, by default?
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# Speed up Mission Control animations and grouping windows by application
+defaults write com.apple.dock expose-animation-duration -float 0.1
+defaults write com.apple.dock "expose-group-by-app" -bool true
+
+# Set email addresses to copy as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app
+defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+
+
+################################################################################
+# Trackpad, mouse, keyboard, Bluetooth accessories, and input
+###############################################################################
+
+# Enable tap-to-click
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+
+# Set fast key repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 0
 
-# Set the Finder prefs for showing a few different volumes on the Desktop.
+# Increase sound quality for Bluetooth headphones/headsets
+defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+# Disable display from automatically adjusting brightness?
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool false
+
+
+###############################################################################
+# General Power and Performance modifications
+###############################################################################
+
+# Speed up wake from sleep to 24 hours from an hour
+# http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
+sudo pmset -a standbydelay 86400
+
+
+###############################################################################
+# Finder
+###############################################################################
+
+# Show icons for hard drives, servers, and removable media on the desktop?
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
-# Run the screensaver if we're in the bottom-left hot corner.
-defaults write com.apple.dock wvous-bl-corner -int 5
-defaults write com.apple.dock wvous-bl-modifier -int 0
+# Show all filename extensions in Finder by default?
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
-# Hide Safari's bookmark bar.
-defaults write com.apple.Safari ShowFavoritesBar -bool false
+# Show status bar in Finder by default?
+defaults write com.apple.finder ShowStatusBar -bool true
 
-# Set up Safari for development.
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+# Use column view in all Finder windows by default?
+defaults write com.apple.finder FXPreferredViewStyle Clmv
+
+# Avoid creation of .DS_Store files on network volumes?
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true

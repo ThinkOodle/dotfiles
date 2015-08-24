@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Get sudo capabilities for a bit
+#
+# keep-alive to update existing `sudo` time stamp until script has finished
+source $DOTZSH/functions/cecho
+
+cecho "Let's get this sudo business out of the way..." $red
+
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
