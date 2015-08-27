@@ -8,6 +8,7 @@ RUBY_GEMS=(
     bundler
     filewatcher
     cocoapods
+    rails
 )
 
 echo "Installing Ruby gems"
