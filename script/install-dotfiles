@@ -11,7 +11,7 @@ curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | 
 if ! [ -h "$HOME/.zshrc" ]; then
   echo "Installing Dotfiles..."
   git clone https://github.com/ThinkOodle/dotfiles.git ~/.dotfiles
-  ~/.dotfiles/script/bootstrap
+  source ~/.dotfiles/script/bootstrap
 else
   echo "Skipping Dotfile installation"
 fi
