@@ -5,7 +5,7 @@
 Run this:
 
 ```sh
-curl -L https://raw.githubusercontent.com/thinkoodle/dotfiles/master/script/install-dotfiles.sh | sh
+curl -L https://raw.githubusercontent.com/thinkoodle/dotfiles/master/script/install-dotfiles | sh
 ```
 
 This will install oh-my-zsh, clone the dotfiles to the proper location, and executes the bootstrap script to  symlink the appropriate files in `.dotfiles` to your home directory.
