@@ -12,10 +12,10 @@ then
   brew install ruby-build > /tmp/ruby-build-install.log
 fi
 
-# echo "  Installing Ruby v2.2.3..."
-# rbenv install 2.2.3
-# rbenv global 2.2.3
-# rbenv rehash
+echo "  Installing Ruby v2.2.3..."
+rbenv install 2.2.3
+rbenv global 2.2.3
+rbenv rehash
 
 # Define gems to install
 RUBY_GEMS=(
