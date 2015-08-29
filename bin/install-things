@@ -24,7 +24,7 @@ read -r response
 case "$response" in
   "1" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/set-defaults.sh; $DOTZSH/osx/install-apps.sh; $DOTZSH/osx/install-fonts.sh;;
   "2" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/set-defaults.sh; $DOTZSH/osx/set-dev-defaults.sh; $DOTZSH/osx/install-packages.sh; $DOTZSH/osx/install-gems.sh; $DOTZSH/osx/install-apps.sh; $DOTZSH/osx/install-dev-apps.sh; $DOTZSH/osx/install-fonts.sh;;
-  "3" ) get-sudo; check-for-homebrew; $DOTZSH/osx/install-packages.sh; $DOTZSH/osx/install-gems.sh;;
+  "3" ) get-sudo; check-for-homebrew; $DOTZSH/osx/install-packages.sh; $DOTZSH/ruby/install.sh;;
   "4" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/install-apps.sh;;
   "5" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/install-dev-apps.sh;;
   "6" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/install-fonts.sh;;

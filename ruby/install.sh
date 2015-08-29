@@ -14,3 +14,16 @@ fi
 
 echo "  Installing Ruby v2.2.3..."
 rbenv install 2.2.3
+
+rbenv rehash
+
+# Define gems to install
+RUBY_GEMS=(
+    bundler
+    filewatcher
+    cocoapods
+    rails
+)
+
+echo "Installing Ruby gems"
+gem install ${RUBY_GEMS[@]}
