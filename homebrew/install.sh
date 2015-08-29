@@ -18,6 +18,9 @@ then
   then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
   fi
+
+else
+  echo "  You already have Homebrew. Skipping installation."
 fi
 
 # Define packages to install

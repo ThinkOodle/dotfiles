@@ -142,21 +142,69 @@ install_dotfiles () {
 echo "Installing homebrew..."
 curl -L https://raw.githubusercontent.com/thinkoodle/dotfiles/master/homebrew/install.sh | sh
 
-echo "Installing Oh-My-Zsh..."
-curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
-if ! [ -h "$HOME/.zshrc" ]; then
-  echo "Installing Dotfiles..."
-  
-  if [ -d "$HOME/.dotfiles" ]; then
-    mv $HOME/.dotfiles $HOME/.dotfiles.backup
+if ! [ -d "$HOME/.oh-my-zsh" ]; then
+  user "File already exists for .oh-my-zsh, what do you want to do?\n\
+  [s]kip installation, [b]ackup and continue?"
+  read -n 1 action
+
+  case "$action" in
+    b )
+      backup=true;;
+    s )
+      skip=true;;
+    * )
+      backup=true;;
+  esac
+
+  if [ $skip != true && $backup == true ]; then
+    echo "Backing up Oh-My-Zsh..."
+    mv $HOME/.oh-my-zsh $HOME/.oh-my-zsh.backup
+
+    echo "Installing Oh-My-Zsh..."
+    curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+  else
+    echo "Skipping Oh-My-Zsh installation"
   fi
-  
+else
+  echo "Installing Oh-My-Zsh..."
+  curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+fi
+
+if ! [ -d "$HOME/.dotfiles" ]; then
+  user "File already exists for .dotfiles, what do you want to do?\n\
+  [s]kip installation, [b]ackup and continue?"
+  read -n 1 action
+
+  case "$action" in
+    b )
+      backup=true;;
+    s )
+      skip=true;;
+    * )
+      backup=true;;
+  esac
+
+  if [ $skip != true && $backup == true ]; then
+    echo "Installing Dotfiles..."
+
+    if [ -d "$HOME/.dotfiles" ]; then
+      mv $HOME/.dotfiles $HOME/.dotfiles.backup
+    fi
+
+    git clone https://github.com/ThinkOodle/dotfiles.git ~/.dotfiles
+    setup_gitconfig
+    install_dotfiles
+
+  else
+    echo "Skipping Dotfile installation"
+  fi
+
+else
+  echo "Installing Dotfiles..."
   git clone https://github.com/ThinkOodle/dotfiles.git ~/.dotfiles
   setup_gitconfig
   install_dotfiles
-else
-  echo "Skipping Dotfile installation"
 fi
 
 echo "Installing vim-plug..."
