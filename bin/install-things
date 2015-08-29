@@ -20,7 +20,7 @@ cecho "6.) Install fonts"
 cecho "7.) Apply standard configurations"
 cecho "8.) Apply dev configurations"
 
-read -r response
+read -n 1 response
 case "$response" in
   "1" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/set-defaults.sh; $DOTZSH/osx/install-apps.sh; $DOTZSH/osx/install-fonts.sh;;
   "2" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/set-defaults.sh; $DOTZSH/osx/set-dev-defaults.sh; $DOTZSH/osx/install-packages.sh; $DOTZSH/osx/install-gems.sh; $DOTZSH/osx/install-apps.sh; $DOTZSH/osx/install-dev-apps.sh; $DOTZSH/osx/install-fonts.sh;;
