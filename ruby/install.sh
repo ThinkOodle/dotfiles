@@ -11,3 +11,6 @@ then
   echo "  Installing ruby-build for you."
   brew install ruby-build > /tmp/ruby-build-install.log
 fi
+
+echo "  Installing Ruby v2.2.3..."
+rbenv install 2.2.3

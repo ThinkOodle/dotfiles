@@ -2,4 +2,5 @@
 if (( $+commands[rbenv] ))
 then
   eval "$(rbenv init -)"
+  export PATH="$HOME/.rbenv/bin:$PATH"
 fi
