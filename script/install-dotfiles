@@ -147,6 +147,11 @@ curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | 
 
 if ! [ -h "$HOME/.zshrc" ]; then
   echo "Installing Dotfiles..."
+  
+  if [ -d "$HOME/.dotfiles" ]; then
+    mv $HOME/.dotfiles $HOME/.dotfiles.backup
+  fi
+  
   git clone https://github.com/ThinkOodle/dotfiles.git ~/.dotfiles
   setup_gitconfig
   install_dotfiles
