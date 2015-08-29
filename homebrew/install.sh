@@ -18,10 +18,24 @@ then
   then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
   fi
-
 fi
 
-# Install homebrew packages
-brew install grc coreutils spark git
+# Define packages to install
+PACKAGES=(
+    coreutils
+    git
+    grc
+    macvim --with-override-system-vim
+    mysql
+    npm
+    rbenv
+    ruby-build
+    spark
+    wget
+)
+
+echo "Installing packages..."
+brew install ${PACKAGES[@]}
+brew linkapps macvim
 
 exit 0
