@@ -40,5 +40,3 @@ PACKAGES=(
 echo "Installing packages..."
 brew install ${PACKAGES[@]}
 brew linkapps macvim
-
-exit 0

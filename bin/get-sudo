@@ -5,6 +5,8 @@
 # keep-alive to update existing `sudo` time stamp until script has finished
 source $DOTZSH/functions/cecho
 
+echo ""
+echo ""
 cecho "Let's get this sudo business out of the way..." $red
 
 sudo -v

@@ -1,10 +1,19 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 #
 # Installs homebrew, gets all dotfiles from the repo,
 # installs oh-my-zsh, and executes the setup script for the dotfiles
 
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd)
+DOTZSH=$HOME/.dotfiles
+
+case "$SHELL" in
+  */zsh) : ;;
+  *)
+    echo "Changing your shell to zsh ..."
+      chsh -s "$(which zsh)"
+    ;;
+esac
 
 set -e
 
@@ -56,7 +65,6 @@ link_file () {
 
   local overwrite= backup= skip=
   local action=
-  local backup_all=true
 
   if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
   then
@@ -130,7 +138,7 @@ link_file () {
 install_dotfiles () {
   info 'installing dotfiles'
 
-  local overwrite_all=false backup_all=false skip_all=false
+  local overwrite_all=false backup_all=true skip_all=false
 
   for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink')
   do
@@ -156,8 +164,9 @@ if [ -d "$HOME/.oh-my-zsh" ]; then
     * )
       backup=true;;
   esac
+  echo $action
 
-  if [ $skip != true && $backup == true ]; then
+  if [ "$skip" != "true" ] && [ "$backup" == "true" ]; then
     echo "Backing up Oh-My-Zsh..."
     mv $HOME/.oh-my-zsh $HOME/.oh-my-zsh.backup
 
@@ -185,7 +194,7 @@ if [ -d "$HOME/.dotfiles" ]; then
       backup=true;;
   esac
 
-  if [ $skip != true && $backup == true ]; then
+  if [ "$skip" != "true" ] && [ "$backup" == "true" ]; then
     echo "Installing Dotfiles..."
 
     if [ -d "$HOME/.dotfiles" ]; then
@@ -211,6 +220,7 @@ echo "Installing vim-plug..."
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo ''
-echo '  All installed!'
+success '  All installed!'
 echo ''
-echo 'Restart Terminal and Run "install-things" to setup everything else'
+
+source $DOTZSH/bin/install-things

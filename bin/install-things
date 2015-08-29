@@ -22,14 +22,14 @@ cecho "8.) Apply dev configurations"
 
 read -n 1 response
 case "$response" in
-  "1" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/set-defaults.sh; $DOTZSH/osx/install-apps.sh; $DOTZSH/osx/install-fonts.sh;;
-  "2" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/set-defaults.sh; $DOTZSH/osx/set-dev-defaults.sh; $DOTZSH/osx/install-packages.sh; $DOTZSH/osx/install-gems.sh; $DOTZSH/osx/install-apps.sh; $DOTZSH/osx/install-dev-apps.sh; $DOTZSH/osx/install-fonts.sh;;
-  "3" ) get-sudo; check-for-homebrew; $DOTZSH/osx/install-packages.sh; $DOTZSH/ruby/install.sh;;
-  "4" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/install-apps.sh;;
-  "5" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/install-dev-apps.sh;;
-  "6" ) get-sudo; check-for-homebrew; check-for-caskroom; $DOTZSH/osx/install-fonts.sh;;
-  "7" ) get-sudo; $DOTZSH/osx/set-defaults.sh;;
-  "8" ) get-sudo; $DOTZSH/osx/set-dev-defaults.sh;;
+  "1" ) source $DOTZSH/bin/get-sudo; source $DOTZSH/bin/check-for-homebrew; source $DOTZSH/bin/check-for-caskroom; source $DOTZSH/osx/set-defaults.sh; source $DOTZSH/osx/install-apps.sh; source $DOTZSH/osx/install-fonts.sh;;
+  "2" ) source $DOTZSH/bin/get-sudo; source $DOTZSH/bin/check-for-homebrew; source $DOTZSH/bin/check-for-caskroom; source $DOTZSH/osx/set-defaults.sh; source $DOTZSH/osx/set-dev-defaults.sh; source $DOTZSH/homebrew/install.sh; source $DOTZSH/ruby/install.sh; source $DOTZSH/osx/install-apps.sh; source $DOTZSH/osx/install-dev-apps.sh; source $DOTZSH/osx/install-fonts.sh;;
+  "3" ) source $DOTZSH/bin/get-sudo; source $DOTZSH/bin/check-for-homebrew; source $DOTZSH/homebrew/install.sh; source $DOTZSH/ruby/install.sh;;
+  "4" ) source $DOTZSH/bin/get-sudo; source $DOTZSH/bin/check-for-homebrew; source $DOTZSH/bin/check-for-caskroom; source $DOTZSH/osx/install-apps.sh;;
+  "5" ) source $DOTZSH/bin/get-sudo; source $DOTZSH/bin/check-for-homebrew; source $DOTZSH/bin/check-for-caskroom; source $DOTZSH/osx/install-dev-apps.sh;;
+  "6" ) source $DOTZSH/bin/get-sudo; source $DOTZSH/bin/check-for-homebrew; source $DOTZSH/bin/check-for-caskroom; source $DOTZSH/osx/install-fonts.sh;;
+  "7" ) source $DOTZSH/bin/get-sudo; source $DOTZSH/osx/set-defaults.sh;;
+  "8" ) source $DOTZSH/bin/get-sudo; source $DOTZSH/osx/set-dev-defaults.sh;;
   * ) echo; cecho "You didn't select an option. I'm outta here!" $red;;
 esac
 

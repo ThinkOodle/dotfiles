@@ -23,11 +23,3 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 if [ ! -d "$HOME/.bin/" ]; then
   mkdir "$HOME/.bin"
 fi
-
-case "$SHELL" in
-  */zsh) : ;;
-  *)
-    echo "Changing your shell to zsh ..."
-      chsh -s "$(which zsh)"
-    ;;
-esac
