@@ -34,3 +34,8 @@
     showOnStartup: false
   "release-notes":
     viewedVersion: "0.89.0"
+  "vim-mode": {}
+  emmet: {}
+  "merge-conflicts": {}
+  "vim-surround": {}
+  pigments: {}

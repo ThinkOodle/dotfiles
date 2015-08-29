@@ -9,13 +9,15 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Fuzzy Finder https://github.com/junegunn/fzf
+" TODO: Shortcuts need to be wired up to make FZF easy to initiate
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-
-" Surround
 Plug 'tpope/vim-surround'
-
-" NERD Commenter
 Plug 'scrooloose/nerdcommenter'
+Plug 'mattn/emmet-vim'
+
+" TODO: Searches in files but can't figure out how the hell to invoke this
+Plug 'ggreer/the_silver_searcher'
+Plug 'rking/ag.vim'
 
 " Add plugins to &runtimepath
 call plug#end()

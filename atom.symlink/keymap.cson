@@ -1,0 +1,6 @@
+# Make < and > work properly and not unhighlight after one tap
+'atom-text-editor.vim-mode:not(.insert-mode)':
+  '>': 'editor:indent-selected-rows'
+
+'atom-text-editor.vim-mode:not(.insert-mode)':
+  '<': 'editor:outdent-selected-rows'
