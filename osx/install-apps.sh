@@ -10,7 +10,7 @@ CASKS=(
     bartender
     dropbox
     google-chrome
-    # microsoft-office
+    microsoft-office-365
     skype
     slack
     vlc
