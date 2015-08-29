@@ -2,8 +2,6 @@
 # Sets reasonable OS X defaults for devs
 #
 
-source $DOTZSH/functions/append-to-zshrc
-
 echo "Adding Dev Specific OSX Configs..."
 
 # Show hidden files in Finder by default?
