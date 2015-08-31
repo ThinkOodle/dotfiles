@@ -33,6 +33,7 @@ PACKAGES=(
     npm
     rbenv
     ruby-build
+    shellcheck
     spark
     wget
 )

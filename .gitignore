@@ -7,3 +7,8 @@ atom.symlink/storage
 atom.symlink/themes
 
 git/gitconfig.symlink
+
+vim.symlink/undo/*
+vim.symlink/swap/*
+vim.symlink/backup/*
+vim.symlink/views/*
