@@ -7,7 +7,6 @@
 CASKS=(
     adobe-creative-cloud
     alfred
-    bartender
     dropbox
     google-chrome
     microsoft-office-365
