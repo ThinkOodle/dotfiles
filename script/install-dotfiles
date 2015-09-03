@@ -3,8 +3,8 @@
 # Installs homebrew, gets all dotfiles from the repo,
 # installs oh-my-zsh, and executes the setup script for the dotfiles
 
-cd "$(dirname "$0")/.."
-DOTFILES_ROOT=$(pwd)
+# cd "$(dirname "$0")/.."
+# DOTFILES_ROOT=$(pwd)
 DOTZSH=$HOME/.dotfiles
 
 case "$SHELL" in
@@ -140,7 +140,7 @@ install_dotfiles () {
 
   local overwrite_all=false backup_all=true skip_all=false
 
-  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink')
+  for src in $(find -H "$DOTZSH" -maxdepth 2 -name '*.symlink')
   do
     dst="$HOME/.$(basename "${src%.*}")"
     link_file "$src" "$dst"
