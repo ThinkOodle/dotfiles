@@ -67,6 +67,9 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 # Show status bar in Finder by default?
 defaults write com.apple.finder ShowStatusBar -bool true
 
+# Show the pathbar
+defaults write com.apple.finder ShowPathbar -bool true
+
 # Use column view in all Finder windows by default?
 defaults write com.apple.finder FXPreferredViewStyle Clmv
 
