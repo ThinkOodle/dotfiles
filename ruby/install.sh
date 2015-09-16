@@ -27,3 +27,6 @@ RUBY_GEMS=(
 
 echo "Installing Ruby gems"
 gem install ${RUBY_GEMS[@]}
+
+echo "Installing Pow"
+curl get.pow.cx | sh
