@@ -28,7 +28,7 @@ PACKAGES=(
     coreutils
     git
     grc
-    macvim --with-override-system-vim
+    # macvim --with-override-system-vim
     mysql
     npm
     rbenv
@@ -40,4 +40,4 @@ PACKAGES=(
 
 echo "Installing packages..."
 brew install ${PACKAGES[@]}
-brew linkapps macvim
+# brew linkapps macvim
