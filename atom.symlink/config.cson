@@ -42,5 +42,4 @@
   pigments: {}
   "atom-beautify":
     _analyticsUserId: "c5c396bf-b995-4758-90e7-b7284534fda0"
-  "tree-view":
-    hideVcsIgnoredFiles: true
+  "tree-view": {}
