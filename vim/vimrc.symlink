@@ -1,5 +1,5 @@
 " Leader
-let mapleader = " "
+let mapleader = ","
 
 set clipboard=unnamed
 set backspace=2   " Backspace deletes like most programs in insert mode
@@ -156,11 +156,6 @@ set spellfile=$HOME/.vim-spell-en.utf-8.add
 " Always use vertical diffs
 set diffopt+=vertical
 
-" Local config
-if filereadable($HOME . "/.vimrc.local")
-  source ~/.vimrc.local
-endif
-
 " NERDTree Stuff
 autocmd StdinReadPre * let s:std_in=1                                         " Auto open when no files are specified
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif   " Auto open when no files are specified
@@ -193,3 +188,7 @@ map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 " Prevent text from unhighlighting when indenting
 vnoremap < <gv
 vnoremap > >gv
+
+if filereadable($HOME . "/.vimrc.local")
+  source ~/.vimrc.local
+endif
