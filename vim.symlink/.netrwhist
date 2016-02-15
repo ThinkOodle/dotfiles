@@ -1,4 +1,5 @@
 let g:netrw_dirhistmax  =10
+<<<<<<< HEAD
 let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/usr/local/Library/Taps/caskroom/homebrew-cask'
 let g:netrw_dirhist_2='/usr/local/Library/Taps/caskroom/homebrew-cask/Casks'
@@ -9,3 +10,6 @@ let g:netrw_dirhist_6='/Users/ryan/.dotfiles'
 let g:netrw_dirhist_7='/Users/ryan'
 let g:netrw_dirhist_8='/Users'
 let g:netrw_dirhist_9='/Users/ryan/Development/Curlys'
+=======
+let g:netrw_dirhist_cnt =0
+>>>>>>> ee93235851d1cd15ea88b59b458eed9c019296b3

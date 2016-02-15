@@ -9,7 +9,7 @@ CASKS=(
     alfred
     dropbox
     google-chrome
-    microsoft-office-365
+    microsoft-office365
     skype
     slack
     vlc
