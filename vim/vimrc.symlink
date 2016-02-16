@@ -189,6 +189,90 @@ map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 vnoremap < <gv
 vnoremap > >gv
 
+"search and replace
+let g:search = ""
+let g:replace = ""
+
+function! SearchForWordInFiles(search)
+	let g:search = ''
+	if a:search == ""
+		let g:search = input('Enter word to search in files : ')
+	else
+		let g:search = a:search
+	endif
+	let g:dir = getcwd()
+
+	let g:filepattern = input('Enter file pattern for "'.g:search.'"": ')
+	if g:filepattern == ""
+		g:filepattern = '*.*'
+	endif
+	echo "\n".'Searching '.g:dir.'/'.g:filepattern.' for '.g:search 
+	exec 'noautocmd vimgrep /\<'.g:search.'\>/ '.g:dir.'/**/'.g:filepattern
+	botright copen
+	exec "redraw!"
+endfunction
+
+function! ReplaceLocal(search,inSelection,wholeWord) range
+	if a:inSelection
+		let l:selectionFlag = '\%V'
+	else
+		let l:selectionFlag = ''
+	endif
+
+	let g:search = ''
+	if a:search == ""
+		let l:inputPrompt = 'Local replace'
+		if a:inSelection == 1
+			let l:inputPrompt .= ', in selection'
+		endif
+		if a:wholeWord
+			let inputPrompt .= ', whole word'
+		endif
+
+		let g:search = input(l:inputPrompt.'. Enter search : ')
+	else
+		let g:search = a:search
+	endif
+
+	exec 'match error /'.l:selectionFlag.g:search.'/'
+
+	let g:replace = input('Replace '.g:search.' with :')
+	if a:wholeWord
+		exec 'silent! %s/\<'.l:selectionFlag.g:search.'\>/'.g:replace.'/gc'
+	else
+		exec 'silent! %s/'.l:selectionFlag.g:search.'/'.g:replace.'/gc'
+	endif
+
+	exec 'match none'
+endfunction
+
+"replace in clist
+function! CFReplace()
+	let g:replace = escape(input('Replace '.g:search.' with :'), '/\&~')
+	exec 'cfir'
+	for quickfix_item in getqflist()
+		exec '%s/' . g:search . '/' . g:replace . '/gec | update'
+		exec 'cn'
+	endfor
+endfunction
+
+"global find prompted
+nn <leader>f :call SearchForWordInFiles('')<CR>
+
+"global find current word
+nn <leader>fw :call SearchForWordInFiles(expand('<cword>'))<CR>
+
+"local replace prompted whole word
+nn <leader>r :call ReplaceLocal('',0,1)<CR>
+
+"local replace whole word
+nn <leader>rw :call ReplaceLocal(expand('<cword>'),0,1)<CR>
+
+"local replace word in selection
+vn <leader>rs :call ReplaceLocal('',1,1)<CR>
+
+"replace in clist
+nn <Leader>rc :call CFReplace()<CR>
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
