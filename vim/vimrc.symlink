@@ -193,3 +193,6 @@ map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 " Prevent text from unhighlighting when indenting
 vnoremap < <gv
 vnoremap > >gv
+
+" Prevent EditorConfig from clashing with Fugitive
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
