@@ -273,6 +273,10 @@ vn <leader>rs :call ReplaceLocal('',1,1)<CR>
 
 "replace in clist
 nn <Leader>rc :call CFReplace()<CR>
+
+" Prevent EditorConfig from clashing with Fugitive
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
