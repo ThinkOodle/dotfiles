@@ -9,8 +9,7 @@ CASKS=(
     alfred
     dropbox
     google-chrome
-    microsoft-office365
-    skype
+    microsoft-office
     slack
     vlc
 )
