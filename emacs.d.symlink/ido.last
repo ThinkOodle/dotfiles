@@ -1,0 +1,29 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/ryan/Development/" . "AceTech/")
+ ("/Users/ryan/" . "Development/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/ryan/Development/AceTech/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ 
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/ryan/Development/AceTech/" (21558 60163 0 0) "solutions.html" "README.md" "package.json" "node_modules/" "modules.html" "index.html" "Gruntfile.js" "form.html" "contributors.txt" "contact.html" "assets/" ".jshintrc" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/ryan/Development/" (22350 55259 0 0) "WP Sandbox/" "Todoist Extension/" "Tisch-store-bak/" "Tisch-bak-GOOD/" "Tisch-bak-3/" "Tisch-bak-2/" "Tisch-bak/" "Tisch - Vagrant/" "Tisch/" "The Landing/" "Test - Stuff/" "test/" "Temp/" "Sublime Projects/" "Splitdown.zip" "Splitdown/" "Smithfield Rails Vagrant/" "simple-magento-vagrant/" "Signature.ai" "Shake Guys/" "Scala/" "runtime-New_configuration/" "RoofingAnnex/" "RLM/" "RailsConfTest/" "RACO/" "PH+B/" "OT Template/" "Orcutt OLD SITE/" "Orcutt and Company Customer Facing Website/" "oodle-framework-wordpress/" "Oodle Website - Old WP/" "Oodle Website/" "Oodle Santa/" "Oodle Framework - WordPress/" "Oodle Code Guide/" "Oodle Business KPI Dashboard/" "Oodle Billing App/" "Oodle Admin Gem/" "npm-debug.log" "Nathans-Famous/" "Moba-Interactive-Website/" "MarketTrack2/" "MarketTrack/" "Magestead/" "magento-test/" "LocomotiveTest/" "Kretschmar/" "jPanelMenu Test/" "Journal/" "JMFG - Nathans - Sell Nathans Products/" "JMFG - m.johnmorrell.com/" "JMFG - Kretschmar - Original/" "JMFG - Kretschmar/" "JMFG - JMFGPhotos.com/" "JMFG - JMFGMenuQuest/" "iOS - Titanium Workspace/" "Innotech Customer Facing Website/" "homestead-docker/" "Homestead/" "Heatermeals Website/" "Geeknote/" "Gabel Center - Customer Facing Website/" "Fuck IE8/" "Ferno - iNX Microsite/" "Ferno - iNX and iNTraxx/" "Ferno - FernoEMS.com Hero/" "Feazel Forms/" "Feazel/" "EM Test/" "dotfiles/" "demo/" "Curlys Emails/" "Curlys/" "CTI/" "CSV Form Submit/" "Cliist/" "CGLG/" "Cavalino/" "CareMonster App/" "Care Share/" "Captain Morgan BBQ - Splash/" "Captain Morgan BBQ/" "Captain Morgan - BBQ Island Game/" "Captain Email/" "apps/" "APlaceYouCantFuckUp/" "Angular Test/" "AceTech/" "361 Degrees/" ".DS_Store" "- NOTES - MKTR.md" "../" "./")
+
+ ("/Users/ryan/" (22377 29567 0 0) "VirtualBox VMs/" "Public/" "Pictures/" "Music/" "Movies/" "Library/" "iCloud Drive (Archive)/" "head.phtml" "geh1681-script.js" "Dropbox (Oodle)/" "Downloads/" "Documents/" "Development/" "Desktop/" "Creative Cloud Files/" "Code/" "bin/" "Applications/" "Andy/" "admin+adobe01@oodle.io Creative Cloud Files/" "100" ".zshrc.bak" ".zshrc-e" ".zshrc" ".zsh_history" ".zsh-update" ".zprofile" ".zcompdump-Ryan’s MacBook Pro-5.2" ".zcompdump-Ryan’s MacBook Pro-5.0.8" ".zcompdump-Ryan’s MacBook Pro-5.0.5" ".zcompdump" ".wget-hsts" ".wegorc" ".vscode/" ".vimrc.bundles" ".vimrc" ".viminfo" ".vim/" ".vagrant.d/" ".v8flags.4.6.85.31.ryan.json" ".v8flags.3.28.71.19.ryan.json" ".Trash/" ".titanium/" ".subversion/" ".ssh/" ".rbenv/" ".python-eggs/" ".psql_history" ".pry_history" ".pow/" ".oracle_jre_usage/" ".oh-my-zsh/" ".npm/" ".node-gyp/" ".netrc" ".NERDTreeBookmarks" ".mysql_history" ".local/" ".lesshst" ".irbrc" ".irb_history" ".hue.json" ".homestead/" ".heroku/" ".gitkraken/" ".gitignore_global" ".gitignore" ".gitconfig" ".gemrc" ".gem/" ".geeknote/" ".fzf.zsh" ".fzf.bash" ".fzf/" ".emacs.d/" ".eclipse/" ".DS_Store" ".dropbox/" ".dotfiles/" ".docker/" ".directory_history/" ".cups/" ".config/" ".composer/" ".CFUserTextEncoding" ".cache/" ".bin/" ".bashrc" ".bash_history" ".atom/" ".appcelerator/" ".android/" ".acs" ".501956.padl" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

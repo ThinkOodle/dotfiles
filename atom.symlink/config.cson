@@ -1,10 +1,24 @@
 "*":
-  editor:
-    showIndentGuide: true
-    fontFamily: "Menlo"
-    invisibles: {}
-    softWrapAtPreferredLineLength: true
+  "atom-beautify":
+    _analyticsUserId: "c5c396bf-b995-4758-90e7-b7284534fda0"
+  "atom-material-ui":
+    colors:
+      abaseColor: "#ec2764"
+      genAccent: true
+      paintCursor: true
+    tabs: {}
+    treeView: {}
+    ui:
+      panelContrast: true
+      panelShadows: true
   core:
+    destroyEmptyPanes: false
+    disabledPackages: [
+      "background-tips"
+      "exception-reporting"
+      "metrics"
+    ]
+    hideGitIgnoredFiles: true
     ignoredNames: [
       ".bundle"
       ".git"
@@ -13,38 +27,36 @@
       "tmp"
       "vendor"
     ]
+    telemetryConsent: "limited"
     themes: [
-      "atom-dark-ui"
-      "one-dark-syntax"
+      "atom-material-ui"
+      "atom-material-syntax"
     ]
-    hideGitIgnoredFiles: true
-    disabledPackages: [
-      "background-tips"
-      "exception-reporting"
-      "metrics"
-    ]
-    destroyEmptyPanes: false
+  deprecated:
+    tool:
+      grunt: true
+      gulp: true
+      npmapm: true
+  editor:
+    fontFamily: "Operator Mono"
+    invisibles: {}
+    lineHeight: 2.5
+    showIndentGuide: true
+    softWrapAtPreferredLineLength: true
+  emmet: {}
+  "merge-conflicts": {}
+  "php-cs-fixer": {}
+  pigments: {}
+  "release-notes":
+    viewedVersion: "0.89.0"
   "spell-check":
     grammars: [
       "text.plain"
       "source.gfm"
       "text.git-commit"
     ]
+  "tree-view": {}
+  "vim-mode": {}
+  "vim-surround": {}
   welcome:
     showOnStartup: false
-  "release-notes":
-    viewedVersion: "0.89.0"
-  "vim-mode": {}
-  emmet: {}
-  "merge-conflicts": {}
-  "vim-surround": {}
-  pigments: {}
-  "atom-beautify":
-    _analyticsUserId: "c5c396bf-b995-4758-90e7-b7284534fda0"
-  "tree-view": {}
-  deprecated:
-    tool:
-      npmapm: true
-      grunt: true
-      gulp: true
-  "php-cs-fixer": {}
