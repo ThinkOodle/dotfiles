@@ -4,6 +4,7 @@
   "atom-material-ui":
     colors:
       abaseColor: "#ec2764"
+      accentColor: "#2dffbe"
       genAccent: true
       paintCursor: true
     tabs: {}
@@ -12,7 +13,6 @@
       panelContrast: true
       panelShadows: true
   core:
-    destroyEmptyPanes: false
     disabledPackages: [
       "background-tips"
       "exception-reporting"
@@ -57,6 +57,8 @@
     ]
   "tree-view": {}
   "vim-mode": {}
+  "vim-mode-plus-ex-mode":
+    notifiedUseExMode: true
   "vim-surround": {}
   welcome:
     showOnStartup: false

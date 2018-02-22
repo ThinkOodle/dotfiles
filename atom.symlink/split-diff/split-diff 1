@@ -1,0 +1,101 @@
+<?php
+// Retreive the Active Term ID (Product Category)
+$termSlug = get_query_var('shopp_category');
+$termObject = get_term_by('slug',$termSlug,'shopp_category');
+$activeCategoryID = $termObject->term_id;
+?>
+
+<!-- START: If Heater Meals Category -->
+<?php if($activeCategoryID == 3): ?>
+<div class="row category-callout padding-bottom-40">
+	
+	<!-- Heater Meals Entree -->
+	<?php
+	$categoryID = 20;
+	$cat = get_term($categoryID,'shopp_category',ARRAY_A);
+	?>
+	<div class="span6 orange-callout position-relative">
+		<div class="padding-15 padding-top-0">
+			<h2 class="font-size-30 bitter-bold callout-title margin-top-0">HeaterMeals <span class="white bitter-bold font-size-40 line-height-40">Entrée</span></h2>
+			<p class="text-center padding-top-5 category-callout-image">
+				<img src="<?php bloginfo('template_url'); ?>/img/hm-cat-entree.png" alt="HeaterMeals Entree">
+			</p>
+			<ul class="overflow-hidden no-margin list-style-none padding-bottom-10">
+				<li class="pull-left"><img src="<?php bloginfo('template_url'); ?>/img/cat-icon-orange-medical.png" alt=""></li>
+				<li class="pull-left padding-left-5"><img src="<?php bloginfo('template_url'); ?>/img/cat-icon-orange-outdoors.png" alt=""></li>
+			</ul>
+			<p class="white font-size-13 line-height-normal padding-bottom-10"><?php echo $cat['description']; ?></p>
+			<a href="<?php shopp('storefront','url'); ?>category/heatermeals-self-heating-meals" class="text-center block no-underline white uppercase lato-bold font-size-13 padding-5 callout-link">See the Collection <i class="icon-chevron-right"></i><i class="icon-chevron-right"></i></a>
+		</div>
+		
+	</div>
+	
+	<!-- Heater Meals EX -->
+	<?php
+	$categoryID = 21;
+	$cat = get_term($categoryID,'shopp_category',ARRAY_A);
+	?>
+	<div class="span6 brown-callout position-relative">
+		<div class="padding-15 padding-top-0">
+			<h2 class="font-size-30 bitter-bold callout-title margin-top-0">HeaterMeals <span class="white bitter-bold font-size-40 line-height-40">EX</span></h2>
+			<p class="text-center padding-top-5 category-callout-image">
+				<img src="<?php bloginfo('template_url'); ?>/img/hm-cat-ex.png" alt="HeaterMeals Entree">
+			</p>
+			<ul class="overflow-hidden no-margin list-style-none padding-bottom-10">
+				<li class="pull-left"><img src="<?php bloginfo('template_url'); ?>/img/cat-icon-brown-medical.png" alt=""></li>
+				<li class="pull-left padding-left-5"><img src="<?php bloginfo('template_url'); ?>/img/cat-icon-brown-emergency.png" alt=""></li>
+			</ul>
+			<p class="white font-size-13 line-height-normal padding-bottom-10"><?php echo $cat['description']; ?></p>
+			<a href="<?php shopp('storefront','url'); ?>category/heatermeals-ex-self-heating-meals" class="text-center block no-underline white uppercase lato-bold font-size-13 padding-5 callout-link">See the Collection <i class="icon-chevron-right"></i><i class="icon-chevron-right"></i></a>
+		</div>
+		
+	</div>
+	
+	<!-- Heater Meals 3 -->
+	<?php
+	$categoryID = 22;
+	$cat = get_term($categoryID,'shopp_category',ARRAY_A);
+	?>
+	<div class="span6 gray-callout position-relative">
+		<div class="padding-15 padding-left-5 padding-top-0">
+			<h2 class="font-size-30 bitter-bold callout-title margin-top-0">HeaterMeals <span class="white bitter-bold font-size-40 line-height-40">3</span></h2>
+			<p class="text-center padding-top-5 category-callout-image">
+				<img src="<?php bloginfo('template_url'); ?>/img/hm-cat-hm3.png" alt="HeaterMeals Entree">
+			</p>
+			<ul class="overflow-hidden no-margin list-style-none padding-bottom-10">
+				<li class="pull-left"><img src="<?php bloginfo('template_url'); ?>/img/cat-icon-gray-emergency.png" alt=""></li>
+				<li class="pull-left padding-left-5"><img src="<?php bloginfo('template_url'); ?>/img/cat-icon-gray-military.png" alt=""></li>
+			</ul>
+			<p class="white font-size-13 line-height-normal padding-bottom-10"><?php echo $cat['description']; ?></p>
+			<a href="<?php shopp('storefront','url'); ?>category/heatermeals-3-self-heating-meal-kits" class="text-center block no-underline white uppercase lato-bold font-size-13 padding-5 callout-link">See the Collection <i class="icon-chevron-right"></i><i class="icon-chevron-right"></i></a>
+		</div>
+		
+	</div>
+	
+	<!-- Heater Meals Plus -->
+	<?php
+	$categoryID = 23;
+	$cat = get_term($categoryID,'shopp_category',ARRAY_A);
+	?>
+	<div class="span6 red-callout position-relative">
+		<div class="padding-15 padding-left-5 padding-top-0">
+			<h2 class="font-size-30 bitter-bold callout-title margin-top-0">HeaterMeals <span class="white bitter-bold font-size-40 line-height-40">Plus</span></h2>
+			<p class="text-center padding-top-5 category-callout-image">
+				<img src="<?php bloginfo('template_url'); ?>/img/hm-cat-plus.png" alt="HeaterMeals Entree">
+			</p>
+			<ul class="overflow-hidden no-margin list-style-none padding-bottom-10">
+				<li class="pull-left"><img src="<?php bloginfo('template_url'); ?>/img/cat-icon-gray-emergency.png" alt=""></li>
+				<li class="pull-left padding-left-5"><img src="<?php bloginfo('template_url'); ?>/img/cat-icon-gray-military.png" alt=""></li>
+			</ul>
+			<p class="white font-size-13 line-height-normal padding-bottom-10"><?php echo $cat['description']; ?></p>
+			<a href="<?php shopp('storefront','url'); ?>category/heatermeals-plus-self-heating-meal-kits" class="text-center block no-underline white uppercase lato-bold font-size-13 padding-5 callout-link">See the Collection <i class="icon-chevron-right"></i><i class="icon-chevron-right"></i></a>
+		</div>
+		
+	</div>
+</div>
+
+<?php endif; ?>
+<!-- END: If Heater Meals Category -->
+
+<!-- Products Grid + Filters -->
+<?php require('custom-products-grid.php'); ?>
