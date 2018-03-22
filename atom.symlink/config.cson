@@ -55,7 +55,8 @@
       "source.gfm"
       "text.git-commit"
     ]
-  "tree-view": {}
+  "tree-view":
+    hideVcsIgnoredFiles: true
   "vim-mode": {}
   "vim-mode-plus-ex-mode":
     notifiedUseExMode: true

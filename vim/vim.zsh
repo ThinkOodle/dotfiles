@@ -7,4 +7,4 @@ function path_prepend() {
     fi
 }
 # This is needed so HomeBrew packages get priority
-path_prepend '/usr/local/bin'
+# path_prepend '/usr/local/bin'
